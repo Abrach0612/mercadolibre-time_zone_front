@@ -1,0 +1,11 @@
+{
+ "DateETS_UTC": "2021-09-04T04:55:00Z",
+ "RouteTime": {
+  "DateGMT": "2021-09-04T05:55GMT+1",
+  "DateUTC": "2021-09-04T04:55:00Z"
+ },
+ "ShipmetRoute": {
+  "DateGMT": "2021-09-04T05:55GMT+1",
+  "DateUTC": "2021-09-04T04:55:00Z"
+ }
+}
