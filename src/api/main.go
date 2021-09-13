@@ -21,10 +21,10 @@ func main() {
 	controllerMain := InitMain{
 		Controller: server.AppendControllers(),
 	}
-	fmt.Printf("\n###Select an Action: ##\n")
+	fmt.Printf("\n### SELECT AN ACTION ###\n")
 	fmt.Printf("\nSelect 1) ETS\n")
 	fmt.Println("Select 2) Shiping-Route")
-	fmt.Printf("Select 3) Set Values\n")
+	fmt.Printf("Select 3) Set values by console\n")
 	fmt.Scanln(&input)
 	op, error := validateOption(input)
 	if error == nil {
@@ -43,8 +43,9 @@ func main() {
 			controllerMain.checkSHP(dat, er)
 		case model.None:
 			var input2 string
-			fmt.Println("*Format for ETS command: \"ets yyyy-MM-ddTHH:mmGMT+-#")
-			fmt.Printf("*Format for Shipment command: \"shp +-#(GMT)\n")
+			fmt.Printf("\n###Example of allowed actions: ###\n")
+			fmt.Printf("\n*Format for ETS command: \"ets 2021-09-12T12:00GMT+1\"\n")
+			fmt.Printf("*Format for Shipment command: \"shp -2\"\n")
 			scanner := bufio.NewScanner(os.Stdin)
 			if scanner.Scan() {
 				input2 = strings.TrimSpace(scanner.Text())
