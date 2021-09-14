@@ -1,6 +1,9 @@
 package util
 
 import (
+	"bufio"
+	"fmt"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -17,14 +20,17 @@ func GetAtoI(value string) int {
 }
 
 func GetSplitDatenadHourETS(jsonDate string) (hourSplit []string, dateSplit []string, gmt string) {
-	hourSplit = strings.Split(jsonDate[11:16], ":")
 	dateSplit = strings.Split(jsonDate[:10], "-")
-	if len(jsonDate) == 21 {
-		gmt = jsonDate[len(jsonDate)-2:]
-
-	} else if len(jsonDate) == 22 {
-		gmt = jsonDate[len(jsonDate)-3:]
-
-	}
+	hourSplit = strings.Split(jsonDate[11:16], ":")
+	gmt = jsonDate[19:22]
 	return hourSplit, dateSplit, gmt
+}
+
+func PrintPressEnter() {
+	fmt.Println("\nPress Enter...")
+	bufio.NewReader(os.Stdin).ReadBytes('\n')
+}
+
+func CreateCPTString(data string, gmt string) string {
+	return data[:10] + "  " + data[11:16] + "   " + "[(" + gmt + "])"
 }
