@@ -65,15 +65,17 @@ func (ets *Ets) GetTimeEts(component DataBody, isDefault bool) {
 
 	fmt.Printf("Fecha UTC: %v ", ets.RouteTime.DateUTC.Format(time.RFC3339))
 	util.PrintPressEnter()
+	fmt.Printf("\n## Convertir a Fecha GMT del site.\n")
+	util.PrintPressEnter()
 	fmt.Printf("Fecha GMT: %s", ets.RouteTime.DateGMT)
 	util.PrintPressEnter()
-	if !isDefault {
-		ets.ShipmetRoute = new(TimeZones)
-		ets.ShipmetRoute.SetTimeZone(component)
-		fmt.Println("*** Shipmet Route Persistente ***")
-		fmt.Printf("Fecha UTC: %s", ets.ShipmetRoute.DateUTC.Format(time.RFC3339))
-		util.PrintPressEnter()
-	}
+	ets.ShipmetRoute = new(TimeZones)
+	ets.ShipmetRoute.SetTimeZone(component)
+	fmt.Println(
+		"*** Shipmet Route Persistente ***")
+	fmt.Printf("Fecha UTC: %s", ets.ShipmetRoute.DateUTC.Format(time.RFC3339))
+	util.PrintPressEnter()
+
 }
 
 func (shipment *ShipmetRoute) SetShipmeRoute(route ComponentRouter, gmt string) {
@@ -97,7 +99,7 @@ func GetTimeUTCDefault(body DataBody) time.Time {
 }
 
 func createCPTString(data string, gmt string) string {
-	return data[:10] + "  " + data[11:16] + "   " + "[(" + gmt + "])"
+	return data[:10] + "  " + data[11:16] + "   " + "[(UTC])"
 }
 
 func GetTimeGMTDefault(body DataBody) time.Time {

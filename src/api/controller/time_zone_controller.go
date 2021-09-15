@@ -23,11 +23,8 @@ type TimeZoneController struct {
 func (controller *TimeZoneController) GetTimeByETS(component model.DataBody, isDefault bool) {
 	dataEts := new(model.Ets)
 	dataEts.GetTimeEts(component, isDefault)
-	if isDefault {
-		controller.NewRunETS(component.TimeGMT)
-	} else {
-		controller.TimeZonesServiceInterface.CreateOutputRouterTime(*dataEts)
-	}
+	controller.TimeZonesServiceInterface.CreateOutputRouterTime(*dataEts)
+
 }
 
 func (controller *TimeZoneController) NewRunETS(gmt string) {
@@ -48,7 +45,7 @@ func (controller *TimeZoneController) NewRunETS(gmt string) {
 		}
 	}
 	dataBody := newMapperModelCTP(inputNew, gmt)
-	controller.GetTimeByETS(dataBody, false)
+	controller.GetTimeByETS(dataBody, true)
 }
 
 func newMapperModelCTP(inputNew string, gmt string) model.DataBody {
@@ -70,8 +67,7 @@ func (controller *TimeZoneController) SetTimeByShipment(route model.ComponentRou
 	}
 	shipmentRout.SetShipmeRoute(route, strings.TrimSpace(gmt))
 	fmt.Println("## Paso 2:  Obtener CPT de shipment Route")
-	fmt.Println("\nLeyendo la fecha y la Hora desde Route Time:")
-	fmt.Printf(route.Date + "\b " + route.Hour)
+	fmt.Printf("\nLeyendo la fecha Persistida: %s "+"y hora: %s", route.Date, route.Hour)
 	util.PrintPressEnter()
 	fmt.Println("*** Shipmet Route ***")
 	fmt.Printf("Fecha Shipment GMT: %s", shipmentRout.ShipmetRoute.DateGMT)
